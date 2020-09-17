@@ -128,10 +128,17 @@ def print_detections(detections, coordinates=False):
             print("{}: {}%".format(label, confidence))
 
 
-def draw_boxes(detections, image, colors):
+def draw_boxes(detections, image, colors, width, height):
     import cv2
+    origin_height, origin_width = image.shape[0], image.shape[1]
+    ratio_width = origin_width / width
+    ratio_height = origin_height / height
     for label, confidence, bbox in detections:
         left, top, right, bottom = bbox2points(bbox)
+        left = int(left * ratio_width)
+        right = int(right * ratio_width)
+        top = int(top * ratio_height)
+        bottom = int(bottom * ratio_height)
         cv2.rectangle(image, (left, top), (right, bottom), colors[label], 1)
         cv2.putText(image, "{} [{:.2f}]".format(label, float(confidence)),
                     (left, top - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,

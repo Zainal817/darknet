@@ -11,17 +11,17 @@ from queue import Queue
 
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
-    parser.add_argument("--input", type=str, default=0,
-                        help="video source. If empty, uses webcam 0 stream")
+    parser.add_argument("--input", type=str, default="./data/challenge.mp4",
+                        help="video source. If empty, uses ./data/challenge.mp4")
     parser.add_argument("--out_filename", type=str, default="",
                         help="inference video name. Not saved if empty")
-    parser.add_argument("--weights", default="yolov4.weights",
+    parser.add_argument("--weights", default="./bin/yolov4-tiny.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
                         help="windown inference display. For headless systems")
     parser.add_argument("--ext_output", action='store_true',
                         help="display bbox coordinates of detected objects")
-    parser.add_argument("--config_file", default="./cfg/yolov4.cfg",
+    parser.add_argument("--config_file", default="./cfg/yolov4-tiny.cfg",
                         help="path to config file")
     parser.add_argument("--data_file", default="./cfg/coco.data",
                         help="path to data file")
@@ -68,7 +68,7 @@ def video_capture(frame_queue, darknet_image_queue):
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame_resized = cv2.resize(frame_rgb, (width, height),
                                    interpolation=cv2.INTER_LINEAR)
-        frame_queue.put(frame_resized)
+        frame_queue.put(frame_rgb)
         darknet.copy_image_from_bytes(darknet_image, frame_resized.tobytes())
         darknet_image_queue.put(darknet_image)
     cap.release()
@@ -95,11 +95,12 @@ def drawing(frame_queue, detections_queue, fps_queue):
         detections = detections_queue.get()
         fps = fps_queue.get()
         if frame_resized is not None:
-            image = darknet.draw_boxes(detections, frame_resized, class_colors)
+            image = darknet.draw_boxes(detections, frame_resized, class_colors, width, height)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             if args.out_filename is not None:
                 video.write(image)
             if not args.dont_show:
+                cv2.namedWindow('Inference', cv2.WINDOW_NORMAL)
                 cv2.imshow('Inference', image)
             if cv2.waitKey(fps) == 27:
                 break
