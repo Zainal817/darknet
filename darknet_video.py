@@ -8,7 +8,6 @@ import argparse
 from threading import Thread, enumerate
 from queue import Queue
 
-
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
     parser.add_argument("--input", type=str, default="./data/challenge.mp4",
@@ -88,7 +87,6 @@ def inference(darknet_image_queue, detections_queue, fps_queue):
         except:
             return
 
-
 def drawing(frame_queue, detections_queue, fps_queue):
     random.seed(3)  # deterministic bbox colors
     video = set_saved_video(cap, args.out_filename, (width, height))
@@ -99,7 +97,7 @@ def drawing(frame_queue, detections_queue, fps_queue):
             fps = fps_queue.get()
             if frame_resized is not None:
                 image = darknet.draw_boxes(detections, frame_resized, class_colors, width, height)
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
                 if args.out_filename is not None:
                     video.write(image)
                 if not args.dont_show:
