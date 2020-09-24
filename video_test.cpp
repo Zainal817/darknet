@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
     std::string  weights_file = "bin/yolov4-tiny.weights";
     std::string filename = "data/challenge.mp4";
 
+
     if (argc > 4) {    //voc.names yolo-voc.cfg yolo-voc.weights test.mp4
         names_file = argv[1];
         cfg_file = argv[2];
@@ -138,7 +139,7 @@ int main(int argc, char *argv[])
 
     auto obj_names = objects_names_from_file(names_file);
     std::string out_videofile = "result.avi";
-    bool const save_output_videofile = false;   // true - for history
+    bool const save_output_videofile = true;   // true - for history
     bool const send_network = false;        // true - for remote detection
     bool const use_kalman_filter = false;   // true - for stationary camera
 
@@ -180,13 +181,12 @@ int main(int argc, char *argv[])
 
                 cv::VideoCapture cap;
                 if (filename == "web_camera") {
-                    cap.open(0);
+                    cap.open(1);
                     cap >> cur_frame;
                 } else if (!use_zed_camera) {
                     cap.open(filename);
                     cap >> cur_frame;
                 }
-
                 video_fps = cap.get(cv::CAP_PROP_FPS);
                 cv::Size const frame_size = cur_frame.size();
                 //cv::Size const frame_size(cap.get(CV_CAP_PROP_FRAME_WIDTH), cap.get(CV_CAP_PROP_FRAME_HEIGHT));
