@@ -29,9 +29,13 @@ void draw_boxes(cv::Mat mat_img, std::vector<bbox_t> result_vec, std::vector<std
         cv::rectangle(mat_img, cv::Rect(i.x, i.y, i.w, i.h), color, 2);
         if (obj_names.size() > i.obj_id) {
             std::string obj_name = obj_names[i.obj_id];
-            //if (obj_name == "car") {
-            //    printf("car detected\n");
-            //}
+            if (obj_name == "car") {
+                printf("car detected\n");
+                if (i.w > mat_img.cols * 0.3)
+                {
+                    printf("car too close");
+                }
+            }
             if (i.track_id > 0) obj_name += " - " + std::to_string(i.track_id);
             cv::Size const text_size = getTextSize(obj_name, cv::FONT_HERSHEY_COMPLEX_SMALL, 1.2, 2, 0);
             int max_width = (text_size.width > i.w + 2) ? text_size.width : (i.w + 2);
@@ -331,6 +335,7 @@ int main(int argc, char *argv[])
 
                         //small_preview.set(draw_frame, result_vec);
                         //large_preview.set(draw_frame, result_vec);
+
                         draw_boxes(draw_frame, result_vec, obj_names, current_fps_det, current_fps_cap);
                         //show_console_result(result_vec, obj_names, detection_data.frame_id);
                         //large_preview.draw(draw_frame);
