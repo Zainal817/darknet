@@ -12,7 +12,7 @@ def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
     parser.add_argument("--input", type=str, default="./data/challenge.mp4",
                         help="video source. If empty, uses ./data/challenge.mp4")
-    parser.add_argument("--out_filename", type=str, default="",
+    parser.add_argument("--out_filename", type=str, default=None,
                         help="inference video name. Not saved if empty")
     parser.add_argument("--weights", default="./bin/yolov4-tiny.weights",
                         help="yolo weights path")
@@ -89,7 +89,8 @@ def inference(darknet_image_queue, detections_queue, fps_queue):
 
 def drawing(frame_queue, detections_queue, fps_queue):
     random.seed(3)  # deterministic bbox colors
-    video = set_saved_video(cap, args.out_filename, (width, height))
+    if args.out_filename is not None:
+        video = set_saved_video(cap, args.out_filename, (width, height))
     while cap.isOpened():
         try:
             frame_resized = frame_queue.get(timeout = 1)
@@ -107,7 +108,8 @@ def drawing(frame_queue, detections_queue, fps_queue):
                     break
         except:
             cap.release()
-            video.release()
+            if args.out_filename is not None:
+                video.release()
             cv2.destroyAllWindows()
     return
 
