@@ -76,7 +76,7 @@ def video_capture(frame_queue, darknet_image_queue):
 def inference(darknet_image_queue, detections_queue, fps_queue):
     while cap.isOpened():
         try:
-            darknet_image = darknet_image_queue.get(timeout = 1)
+            darknet_image = darknet_image_queue.get(timeout = 2)
             prev_time = time.time()
             detections = darknet.detect_image(network, class_names, darknet_image, thresh=args.thresh)
             detections_queue.put(detections)
@@ -93,8 +93,8 @@ def drawing(frame_queue, detections_queue, fps_queue):
         video = set_saved_video(cap, args.out_filename, (width, height))
     while cap.isOpened():
         try:
-            frame_resized = frame_queue.get(timeout = 1)
-            detections = detections_queue.get(timeout = 1)
+            frame_resized = frame_queue.get(timeout = 2)
+            detections = detections_queue.get()
             fps = fps_queue.get()
             if frame_resized is not None:
                 image = darknet.draw_boxes(detections, frame_resized, class_colors, width, height)
@@ -103,6 +103,7 @@ def drawing(frame_queue, detections_queue, fps_queue):
                     video.write(image)
                 if not args.dont_show:
                     cv2.namedWindow('Inference', cv2.WINDOW_NORMAL)
+                    cv2.resizeWindow('Inference', width,height)
                     cv2.imshow('Inference', image)
                 if cv2.waitKey(1) == 27:
                     break
