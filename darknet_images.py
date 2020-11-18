@@ -11,7 +11,7 @@ import darknet
 
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
-    parser.add_argument("--input", type=str, default="./data/road.png",
+    parser.add_argument("--input", type=str, default="./data/green_light_02.png",
                         help="image source. It can be a single image, a"
                         "txt with paths to them, or a folder. Image valid"
                         " formats are jpg, jpeg or png."
@@ -30,7 +30,7 @@ def parser():
                         help="path to config file")
     parser.add_argument("--data_file", default="./cfg/coco.data",
                         help="path to data file")
-    parser.add_argument("--thresh", type=float, default=.1,
+    parser.add_argument("--thresh", type=float, default=.2,
                         help="remove detections with lower confidence")
     return parser.parse_args()
 
