@@ -97,7 +97,7 @@ def drawing(frame_queue, detections_queue, fps_queue):
             detections = detections_queue.get()
             fps = fps_queue.get()
             if frame_resized is not None:
-                image = darknet.draw_boxes(detections, frame_resized, class_colors, width, height)
+                image = darknet.draw_boxes_video(detections, frame_resized, class_colors, width, height)
                 image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
                 if args.out_filename is not None:
                     video.write(image)

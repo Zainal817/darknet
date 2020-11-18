@@ -11,14 +11,14 @@ import darknet
 
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
-    parser.add_argument("--input", type=str, default="",
+    parser.add_argument("--input", type=str, default="./data/road.png",
                         help="image source. It can be a single image, a"
                         "txt with paths to them, or a folder. Image valid"
                         " formats are jpg, jpeg or png."
                         "If no input is given, ")
     parser.add_argument("--batch_size", default=1, type=int,
                         help="number of images to be processed at the same time")
-    parser.add_argument("--weights", default="yolov4.weights",
+    parser.add_argument("--weights", default="./bin/yolov4-tiny.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
                         help="windown inference display. For headless systems")
@@ -26,11 +26,11 @@ def parser():
                         help="display bbox coordinates of detected objects")
     parser.add_argument("--save_labels", action='store_true',
                         help="save detections bbox for each image in yolo format")
-    parser.add_argument("--config_file", default="./cfg/yolov4.cfg",
+    parser.add_argument("--config_file", default="./cfg/yolov4-tiny.cfg",
                         help="path to config file")
     parser.add_argument("--data_file", default="./cfg/coco.data",
                         help="path to data file")
-    parser.add_argument("--thresh", type=float, default=.25,
+    parser.add_argument("--thresh", type=float, default=.1,
                         help="remove detections with lower confidence")
     return parser.parse_args()
 
