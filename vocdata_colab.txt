@@ -1,0 +1,4 @@
+classes = 20
+train = /content/manifest.txt
+names = /content/vocnames.txt
+backup = /content/backup
