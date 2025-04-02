@@ -94,7 +94,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y mono-devel zlib1g
         sudo apt-get install -y libgles2-mesa-dev
-        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
 
     - name: Clean downloads
       run: sudo apt-get clean
@@ -167,7 +167,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y mono-devel zlib1g
         sudo apt-get install -y libgles2-mesa-dev
-        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
 
     - name: Clean downloads
       run: sudo apt-get clean
@@ -208,7 +208,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y mono-devel zlib1g
         sudo apt-get install -y libgles2-mesa-dev
-        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
 
     - name: Clean downloads
       run: sudo apt-get clean
@@ -277,13 +277,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-
     - name: Update apt & install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y libopencv-dev
         sudo apt-get install -y mono-devel zlib1g
-        sudo apt-GET install -y libgles2-mesa-dev
+        sudo apt-get install -y libgles2-mesa-dev
 
     - name: Clean downloads
       run: sudo apt-get clean
@@ -341,6 +340,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-devel
+
+    - name: Clean downloads
+      run: sudo apt-get clean
 
     - name: 'Setup vcpkg and NuGet artifacts backend'
       shell: bash

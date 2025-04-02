@@ -12,10 +12,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt install libopencv-dev libgles2-mesa-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopencv-dev
+        sudo apt-get install -y mono-devel zlib1g
+        sudo apt-get install -y libgles2-mesa-dev
+
+    - name: Clean downloads
+      run: sudo apt-get clean
 
     - name: 'Install CUDA'
       run: ${{ github.workspace }}/scripts/deploy-cuda.sh
@@ -70,10 +75,13 @@ jobs:
 
     - uses: lukka/get-cmake@latest
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libgles2-mesa-dev libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-devel zlib1g
+        sudo apt-get install -y libgles2-mesa-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
+
     - name: Clean downloads
       run: sudo apt-get clean
 
@@ -103,7 +111,7 @@ jobs:
         CUDA_PATH: "/usr/local/cuda"
         CUDA_TOOLKIT_ROOT_DIR: "/usr/local/cuda"
         LD_LIBRARY_PATH: "/usr/local/cuda/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH"
-      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -DoNotUpdateVCPKG -EnableOPENCV -EnableCUDA -EnableCUDNN -DisableInteractive -DoNotUpdateTOOL
+      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -DoNotUpdateVCPKG -EnableOPENCV -EnableCUDA -EnableCUDNN -DisableInteractive -DoNotUpdateTOOL -BuildInstaller
 
 
   ubuntu-vcpkg-opencv3:
@@ -113,10 +121,13 @@ jobs:
 
     - uses: lukka/get-cmake@latest
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libgles2-mesa-dev libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-devel zlib1g
+        sudo apt-get install -y libgles2-mesa-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
+
     - name: Clean downloads
       run: sudo apt-get clean
 
@@ -141,10 +152,13 @@ jobs:
 
     - uses: lukka/get-cmake@latest
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libgles2-mesa-dev libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-devel zlib1g
+        sudo apt-get install -y libgles2-mesa-dev
+        sudo apt-get install -y --no-install-recommends yasm nasm gperf automake autoconf libtool pkg-config autoconf-archive libx11-dev libxft-dev libxext-dev libxrandr-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libdbus-1-dev libxtst-dev libltdl-dev
+
     - name: Clean downloads
       run: sudo apt-get clean
 
@@ -167,10 +181,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt install libopencv-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopencv-dev
+        sudo apt-get install -y mono-devel zlib1g
+
+    - name: Clean downloads
+      run: sudo apt-get clean
 
     - uses: lukka/get-cmake@latest
 
@@ -189,10 +207,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Update apt
-      run: sudo apt update
-    - name: Install dependencies
-      run: sudo apt install libopencv-dev libgles2-mesa-dev
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopencv-dev
+        sudo apt-get install -y mono-devel zlib1g
+        sudo apt-get install -y libgles2-mesa-dev
+
+    - name: Clean downloads
+      run: sudo apt-get clean
 
     - uses: lukka/get-cmake@latest
 
@@ -239,6 +262,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Update apt & install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-devel
+
+    - name: Clean downloads
+      run: sudo apt-get clean
+
     - name: 'Setup vcpkg and NuGet artifacts backend'
       shell: bash
       run: >
@@ -274,7 +305,7 @@ jobs:
 
     - name: 'Build'
       shell: pwsh
-      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -DoNotUpdateVCPKG -EnableOPENCV -DisableInteractive -DoNotUpdateTOOL
+      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -DoNotUpdateVCPKG -EnableOPENCV -DisableInteractive -DoNotUpdateTOOL -BuildInstaller
 
 
   osx:
@@ -322,7 +353,7 @@ jobs:
 
     - name: 'Build'
       shell: pwsh
-      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -ForceLocalVCPKG -DoNotUpdateVCPKG -EnableOPENCV -DisableInteractive -DoNotUpdateTOOL
+      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -ForceLocalVCPKG -DoNotUpdateVCPKG -EnableOPENCV -DisableInteractive -DoNotUpdateTOOL -BuildInstaller
 
 
   win-intlibs:
