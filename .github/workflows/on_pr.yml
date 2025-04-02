@@ -10,7 +10,7 @@ jobs:
   ubuntu-makefile:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Update apt
       run: sudo apt update
@@ -66,7 +66,7 @@ jobs:
   ubuntu-vcpkg-opencv4-cuda:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -109,7 +109,7 @@ jobs:
   ubuntu-vcpkg-opencv3:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -137,7 +137,7 @@ jobs:
   ubuntu-vcpkg-opencv2:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -165,7 +165,7 @@ jobs:
   ubuntu:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Update apt
       run: sudo apt update
@@ -187,7 +187,7 @@ jobs:
   ubuntu-cuda:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Update apt
       run: sudo apt update
@@ -219,7 +219,7 @@ jobs:
   ubuntu-no-ocv-cpp:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -237,7 +237,7 @@ jobs:
   ubuntu-setup-sh:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Setup vcpkg and NuGet artifacts backend'
       shell: bash
@@ -256,7 +256,7 @@ jobs:
   osx-vcpkg:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: brew install libomp yasm nasm pkg-config automake autoconf-archive
@@ -280,7 +280,7 @@ jobs:
   osx:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: brew install opencv libomp
@@ -295,7 +295,7 @@ jobs:
   osx-no-ocv-no-omp-cpp:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -307,7 +307,7 @@ jobs:
   win-vcpkg:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -328,7 +328,7 @@ jobs:
   win-intlibs:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -340,7 +340,7 @@ jobs:
   win-setup-ps1:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Setup vcpkg and NuGet artifacts backend'
       shell: bash
@@ -359,7 +359,7 @@ jobs:
   win-vcpkg-base-cpp:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -385,7 +385,7 @@ jobs:
   win-csharp:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -397,7 +397,7 @@ jobs:
   win-intlibs-cuda:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: 'Install CUDA'
       run: ${{ github.workspace }}/scripts/deploy-cuda.ps1
 
@@ -415,7 +415,7 @@ jobs:
   win-powershell51:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
@@ -427,7 +427,7 @@ jobs:
   mingw:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: lukka/get-cmake@latest
 
